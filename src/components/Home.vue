@@ -37,8 +37,8 @@
                     >
                         <v-btn :loading="loading" :disabled="!isValidForm2" @click="decodeUrl()">Decode url</v-btn>
                     </v-col>
-                    <h5 v-if="decodedUrl" class="mt-3 mb-3">Your decoded url is: <a :href="decodedUrl" target="_blank">{{ decodedUrl }}</a></h5>
                 </v-row>
+                <h5 v-if="decodedUrl" class="mt-3 mb-3">Your decoded url is: <a :href="decodedUrl" target="_blank">{{ decodedUrl }}</a></h5>
             </v-form>
         </v-container>
     </div>
@@ -68,7 +68,7 @@ export default {
         async shortenUrl() {
             this.loading = true;
             try {
-                let response = await axios.post("/url_shortener/encode/", {long_url: this.urlToShorten});
+                let response = await axios.post("/url_shortener/encode/", {long_url: this.urlToShorten.replace(/\s+/g, '')});
                 if(!response.data.success) {
                     this.$notify({ type: "error", text: response.data.message });
                 } else {
@@ -84,7 +84,7 @@ export default {
         async decodeUrl() {
             this.loading = true;
             try {
-                let response = await axios.post("/url_shortener/decode/", {short_url: this.urlToDecode.replace(settings.API_URL, '')});
+                let response = await axios.post("/url_shortener/decode/", {short_url: this.urlToDecode.replace(/\s+/g, '').replace(settings.API_URL, '')});
                 if(!response.data.success) {
                     this.$notify({ type: "error", text: response.data.message });
                 } else {
