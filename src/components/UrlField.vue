@@ -31,7 +31,7 @@ export default {
         value() {
             this.url = this.value;
         },
-        email() {
+        url() {
             this.$emit("input", this.url);
         }
     },

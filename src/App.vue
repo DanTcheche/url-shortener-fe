@@ -12,6 +12,7 @@
     <v-main>
       <Home />
     </v-main>
+      <notifications position="top right" ignore-duplicates style="z-index: 1000000" />
   </v-app>
 </template>
 

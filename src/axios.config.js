@@ -1,9 +1,11 @@
 import axios from "axios";
-import settings from "./settings";
+import settings from "@/settings";
 
 axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken"
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 
 export default axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: settings.API_URL,
   headers: { "Content-Type": "application/json" }
 });
